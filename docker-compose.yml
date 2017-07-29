@@ -1,24 +1,18 @@
 version: '2'
 
-services: 
-         nginx-proxy:
-              image: nginx-proxy:0.1
-              ports:
-                     - 80:80
-              restart: always
-
+services:
          online:
-              depends_on:
-                     - nginx-proxy
-              image: online-img:0.1
-              restart: always
-
-         hours_in_between:
-              depends_on:
-                     - nginx-proxy
-              image: hours-in-between-img:1.0
-              restart: always 
-                       
-           
-                        
-          
+              build: ../my-apps/online
+              image: online:0.1
+              container_name: online
+         hours-in-between:
+               build: ../my-apps/hours-in-between
+               image: hours-in-between:0.1
+               container_name: hours-in-between
+         nginx-proxy:
+              build: ../my-apps/nginx-proxy
+              image: nginx-proxy:0.1
+              container_name: nginx-proxy
+              ports:
+                   - "80:80"
+~
