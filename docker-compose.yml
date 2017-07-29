@@ -1,0 +1,24 @@
+version: '2'
+
+services: 
+         nginx-proxy:
+              image: nginx-proxy:0.1
+              ports:
+                     - 80:80
+              restart: always
+
+         online:
+              depends_on:
+                     - nginx-proxy
+              image: online-img:0.1
+              restart: always
+
+         hours_in_between:
+              depends_on:
+                     - nginx-proxy
+              image: hours-in-between-img:1.0
+              restart: always 
+                       
+           
+                        
+          
